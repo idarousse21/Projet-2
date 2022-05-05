@@ -1,4 +1,3 @@
-from urllib import response
 import requests
 from bs4 import BeautifulSoup
 import urllib.parse
@@ -11,7 +10,7 @@ def parse_page(url):
     soup = BeautifulSoup(reponse.text, "html.parser")
     return soup
 
-
+"""
 for i in range(51):
     url_1 = "https://books.toscrape.com/catalogue/page" + str(i) + ".html"
     reponse = requests.get(url)
@@ -39,23 +38,22 @@ for i in range(51):
         print(category)
         print(review_rating)
         print(image_url["src"])
-
 """
-def url_categorie(categorie):
-    soup = parse_page(categorie)
+
+def scrap_categories(home_url):
+    soup = parse_page(home_url)
     for web in (
         soup.find("ul", class_="nav nav-list").find("li").find("ul").find_all("li")
     ):
         href = web.a.get("href")
-        print(href)
+        books_url = urllib.parse.urljoin(home_url, href)
+        scrap_books_infos(books_url)
 
-
-def get_info_book(book_info):
-    soup = url_categorie(book_info)
+def scrap_books_infos(books_url):
+    soup = parse_page(books_url)
     for web in soup.find_all("h3"):
         href = web.a.get("href")
-        reponse = requests.get(urllib.parse.urljoin(url, href))
-        soup = BeautifulSoup(reponse.text, "html.parser")
+        soup = parse_page(urllib.parse.urljoin(books_url, href))
         rows = soup.find_all("td")
         universal_product_code = rows[0].get_text()
         title = soup.find("h1").get_text()
@@ -75,5 +73,4 @@ def get_info_book(book_info):
         print(category)
         print(review_rating)
         print(image_url["src"])
-
-"""
+scrap_categories(url)
