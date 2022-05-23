@@ -5,68 +5,50 @@ import requests
 from bs4 import BeautifulSoup
 import os
 
-url = "http://books.toscrape.com/index.html"
-
 
 def parse_page(url):
     reponse = requests.get(url)
-    soup = BeautifulSoup(reponse.text, "html.parser")
+    soup = BeautifulSoup(reponse.content, "html.parser")
     return soup
 
 
 def scrap_all_books(home_url):
-    for web in (
-        parse_page(home_url).find("ul", class_="nav nav-list").find("li").find("ul").find_all("li")
-    ):
-        name = web.a.text.strip()
-    csv_name = ((name + ".csv").replace(" ", "_"))
-
-    cat = "./folder_csv_file"
-    os.makedirs("folder_csv_file", exist_ok=True)
-
-    csv_name = f"{cat}/{csv_name}"
-    with open(csv_name, "w", newline="", encoding="utf-8") as fichier:
-        thewriter = DictWriter(
-            fichier,
-            fieldnames=[
-                "title",
-                "universal_product_code",
-                "price_including_tax",
-                "price_excluding_tax",
-                "number_available",
-                "product_description",
-                "category",
-                "review_rating",
-                "image_url",
-            ],
-        )
-        csv_writer
-        thewriter.writeheader()
-        for book_info in get_categories(home_url):
-            thewriter.writerow(book_info)
-
-
-def get_categories(home_url):
+    os.makedirs("book_to_scrap_categories", exist_ok=True)
     soup = parse_page(home_url)
     for web in (
         soup.find("ul", class_="nav nav-list").find("li").find("ul").find_all("li")
     ):
         href = web.a.get("href")
+        category_urls = urllib.parse.urljoin(home_url, href)
         name = web.a.text.strip()
         print(name)
-        books_url = urllib.parse.urljoin(home_url, href)
-        # img = "./cat"
-        # os.makedirs(img, exist_ok=True)
-        # response = requests.get(books_url, allow_redirects=True)
-        # pictures_name = ''.join(filter(str.isalnum, name))
-        # pictures_name = f"{img}/{pictures_name}"
-        # with open(pictures_name + ".csv", "w") as file:
-        #     file.write(response.content)
-        for book_info in get_next_pages_categories(books_url):
-            yield book_info
+        csv_name = (name + ".csv").replace(" ", "_")
+
+        categories = "./book_to_scrap_categories"
+        csv_name = f"{categories}/{csv_name}"
+        with open(csv_name, "w", newline="", encoding="utf8") as csv_files:
+            # csv_writer = csv.writer(csv_files)
+            thewriter = DictWriter(
+                csv_files,
+                fieldnames=[
+                    "product_page_url",
+                    "title",
+                    "universal_product_code",
+                    "price_including_tax",
+                    "price_excluding_tax",
+                    "number_available",
+                    "product_description",
+                    "category",
+                    "review_rating",
+                    "image_url",
+                ],
+            )
+            thewriter.writeheader()
+            for book_info in get_books_for_category(category_urls):
+                thewriter.writerow(book_info)
 
 
-def get_next_pages_categories(url):
+def get_books_for_category(url):
     for book_info in get_books_page(url):
         yield book_info
     while True:
@@ -101,17 +83,21 @@ def scrap_infos_book(book_url):
     product_description = soup.find_all("p")[3].get_text()
     category = soup.find_all("a")[3].get_text()
     review_rating = rows[6].get_text()
-    image_url = "https://books.toscrape.com/" + soup.find_all("img")[0].get("src")
-    # img = "./folder_image_of_book"
-    # os.makedirs(img, exist_ok=True)
-    # response = requests.get(image_url, allow_redirects=True)
-    # pictures_name = ''.join(filter(str.isalnum, title))
-    # pictures_name = f"{img}/{pictures_name}"
-    # with open(pictures_name + ".jpg", "wb") as file:
-    #     file.write(response.content)
+    image_url = soup.find("img").get("src")
+    image_url = urllib.parse.urljoin(book_url, image_url)
+    dossier_image = "./image_book_to_scrap"
+    os.makedirs(dossier_image, exist_ok=True)
+    response = requests.get(image_url, allow_redirects=True)
+
+    pictures_name = "".join(filter(str.isalnum, title))
+    pictures_name = f"{dossier_image}/{pictures_name}"
+    with open(pictures_name + ".jpg", "wb") as file:
+        file.write(response.content)
+
     return {
-        "title": title,
+        "product_page_url": book_url,
         "universal_product_code": universal_product_code,
+        "title": title,
         "price_including_tax": price_including_tax,
         "price_excluding_tax": price_excluding_tax,
         "number_available": number_available,
@@ -121,5 +107,7 @@ def scrap_infos_book(book_url):
         "image_url": image_url,
     }
 
+
+url = "https://books.toscrape.com/index.html"
 
 scrap_all_books(url)
