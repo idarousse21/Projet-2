@@ -1,4 +1,3 @@
-import csv
 import urllib.parse
 from csv import DictWriter
 import requests
