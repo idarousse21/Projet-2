@@ -34,7 +34,7 @@
         </li>
     </ul>
 </p>
-------------------------------
+
 <h2 align = "center"> Lancement du code </h2>
 <p>Pour commencer il faut lancer l'invite de commande et utliser les commande suivante:
     <ol>
@@ -46,7 +46,7 @@
                 git clone https://github.com/idarousse21/Projet-2.git</li>
             <li>Diriger vous sur le dossier cloner:<br/>
                 cd "Nom du fichier"</li>
-            <li>Il faut créer un environnement virtuel : :<br/>
+            <li>Il faut créer un environnement virtuel:<br/>
             python -m venv env</li>
             <li>Paramétrer les librairies sur lesquelles le logiciel a été développé:<br/>
                 pip install -r Requirement.txt</li>
