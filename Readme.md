@@ -36,12 +36,33 @@
 </p>
 ------------------------------
 <h2 align = "center"> Lancement du code </h2>
-<p>Pour commencer il faut lancer l'invite de commande.
+<p>Pour commencer il faut lancer l'invite de commande et utliser les commande suivante:
         <ol>
-            Crée un dossier pour déposer les fichier du github:<br/>
-            <li>mkdir "Nom du fichier</li>
+            <li>Crée un dossier pour déposer les fichier du github:<br/>
+                mkdir "Nom du fichier</li>
         </ol>
-           
-
-  
-    
+        <ol>
+            <li>Diriger vous sur le dossier crée:<br/>
+                cd "Nom du fichier"</li>
+        </ol>
+        <ol>
+            <li>Ensuite il faut cloner le projet  :<br/>
+                git clone https://github.com/idarousse21/Projet-2.git</li>
+        </ol>
+        <ol>
+            <li>Diriger vous sur le dossier cloner:<br/>
+                cd "Nom du fichier"</li>
+        </ol>  
+        <ol>
+            <li>Il faut créer un environnement virtuel : :<br/>
+                python -m venv env</li>
+        </ol>  
+        <ol>
+            <li>Paramétrer les librairies sur lesquelles le logiciel a été développé:<br/>
+                pip install -r Requirement.txt</li>
+        </ol>
+        <ol>
+            <li>Et enfin lancer le logiciel:<br/>
+                python projet-2.py</li>
+        </ol>
+    Vous pouvez constater l'avancement de l'écriture de fichier csv sur l'invite de commande.
