@@ -9,6 +9,7 @@
     <li>
         <a href = "https://www.python.org/downloads/">Python </a>
     </li>
+</ul>
 </p>
 <p>
     Nous utiliserons aussi les librairies python:
@@ -31,10 +32,11 @@
         <li>
             <a href = "https://docs.python.org/3/library/os.html">Os</a>
         </li>
+    </ul>
 </p>
 ------------------------------
 <h2 align = "center"> Lancement du code </h2>
-<p>Pour commencere il faut lancer l'invite de commande.
+<p>Pour commencer il faut lancer l'invite de commande.
     <ul>
         <ol>
             Crée un dossier pour déposer les fichier du github:<br/>

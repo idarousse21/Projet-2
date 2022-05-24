@@ -1,6 +1,4 @@
 beautifulsoup4==4.11.1
-black==22.3.0
-bleach==3.1.5
 bs4==0.0.1
 csvfile==3.4.0
 requests==2.27.1

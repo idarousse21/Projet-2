@@ -6,8 +6,8 @@ import os
 
 
 def parse_page(url):
-    reponse = requests.get(url)
-    soup = BeautifulSoup(reponse.content, "html.parser")
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, "html.parser")
     return soup
 
 
@@ -19,15 +19,14 @@ def scrap_all_books(home_url):
     ):
         href = web.a.get("href")
         category_urls = urllib.parse.urljoin(home_url, href)
-        name = web.a.text.strip()
-        print(name)
-        csv_name = (name + ".csv").replace(" ", "_")
+        name_category = web.a.text.strip()
+        print(name_category)
+        csv_name = (name_category + ".csv").replace(" ", "_")
 
         categories = "./book_to_scrap_categories"
         csv_name = f"{categories}/{csv_name}"
         with open(csv_name, "w", newline="", encoding="utf8") as csv_files:
-            # csv_writer = csv.writer(csv_files)
-            thewriter = DictWriter(
+            writer = DictWriter(
                 csv_files,
                 fieldnames=[
                     "product_page_url",
@@ -42,21 +41,21 @@ def scrap_all_books(home_url):
                     "image_url",
                 ],
             )
-            thewriter.writeheader()
+            writer.writeheader()
             for book_info in get_books_for_category(category_urls):
-                thewriter.writerow(book_info)
+                writer.writerow(book_info)
 
 
-def get_books_for_category(url):
-    for book_info in get_books_page(url):
+def get_books_for_category(url_parse):
+    for book_info in get_books_page(url_parse):
         yield book_info
     while True:
-        soup = parse_page(url)
+        soup = parse_page(url_parse)
         next_page = soup.select_one("li.next>a")
         if next_page:
             next_url = next_page.get("href")
-            url = urllib.parse.urljoin(url, next_url)
-            for book_info in get_books_page(url):
+            url_parse = urllib.parse.urljoin(url_parse, next_url)
+            for book_info in get_books_page(url_parse):
                 yield book_info
         else:
             break
