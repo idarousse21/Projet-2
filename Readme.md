@@ -3,8 +3,9 @@
 ------------------------------
 <h2 align = "center"> Lancement du code </h2>
 
-    Pour utilisé le code il faut tout d'abord commencer par installé l'application python.  
-
+<p>
+    Pour utilisé le code il faut tout d'abord commencer par installé l'application python.
+<ul>
     <li>
         <a href = "https://www.python.org/downloads/">Python </a>
     </li>
@@ -35,10 +36,11 @@
 </p>
 ------------------------------
 <h2 align = "center"> Lancement du code </h2>
-<p>Pour commencer il faut lancer l'invite de commande.  
-    1. Crée un dossier pour déposer les fichier du github:<br/>
-        <li>mkdir "Nom du fichier</li>
-    2. 
+<p>Pour commencer il faut lancer l'invite de commande.
+        <ol>
+            Crée un dossier pour déposer les fichier du github:<br/>
+            <li>mkdir "Nom du fichier</li>
+        </ol>
            
 
   
