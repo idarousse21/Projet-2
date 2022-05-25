@@ -1,7 +1,7 @@
 <h1 align ="center">Explication et lancement du code</h1>
 
 ------------------------------
-<h2 align = "center"> Lancement du code </h2>
+<h2 align = "center"> Application et librairies </h2>
 
 <p>
     Pour utilisé le code il faut tout d'abord commencer par installé l'application python.
