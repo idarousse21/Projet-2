@@ -39,13 +39,13 @@
 <p>Pour commencer il faut lancer l'invite de commande et utliser les commande suivante:
     <ol>
             <li>Crée un dossier pour déposer les fichier du github:<br/>
-                mkdir "Nom du fichier</li>
+                mkdir "Nom du dossier"</li>
             <li>Diriger vous sur le dossier crée:<br/>
-                cd "Nom du fichier"</li>
+                cd "Nom du dossier"</li>
             <li>Ensuite il faut cloner le projet  :<br/>
                 git clone https://github.com/idarousse21/Projet-2.git</li>
             <li>Diriger vous sur le dossier cloner:<br/>
-                cd "Nom du fichier"</li>
+                cd "Nom du dossier"</li>
             <li>Il faut créer un environnement virtuel:<br/>
             python -m venv env</li>
             <li>Paramétrer les librairies sur lesquelles le logiciel a été développé:<br/>
