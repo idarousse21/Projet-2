@@ -45,7 +45,10 @@
             <li>Créez un environnement virtuel:<br/>
                 python -m venv env</li>
             <li>Puis activation de l'environnement virtuel:<br/>
-                env\Scripts\activate</li>
+                Sur Windows:<br/>
+                env\Scripts\activate</li><br/>
+                Sous Mac/Linus:<br/>
+                source/env/Scripts/activate
             <li>Configurez les bibliothèques à partir desquelles le logiciel a été développé:<br/>
                 pip install -r Requirements.txt</li>
             <li>Et pour finir, lancez le logiciel:<br/>
