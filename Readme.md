@@ -46,7 +46,7 @@
                 python -m venv env</li>
             <li>Puis activation de l'environnement virtuel:<br/>
                 Sur Windows:<br/>
-                env\Scripts\activate</li><br/>
+                env\Scripts\activate<br/>
                 Sous Mac/Linus:<br/>
                 source/env/Scripts/activate
             <li>Configurez les bibliothèques à partir desquelles le logiciel a été développé:<br/>
