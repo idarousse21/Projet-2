@@ -1,10 +1,10 @@
 <h1 align ="center">Explication et lancement du code</h1>
 
 ------------------------------
-<h2 align = "center"> Application et librairies </h2>
+<h2 align = "center"> Application et bibliothèques </h2>
 
 <p>
-    Pour utilisé le code il faut tout d'abord commencer par installé l'application python.
+    Pour employer le code, tout d'abord, installez l'application python.
 <ul>
     <li>
         <a href = "https://www.python.org/downloads/">Python </a>
@@ -12,7 +12,7 @@
 </ul>
 </p>
 <p>
-    Nous utiliserons aussi les librairies python:
+    Nous utiliserons également les bibliothèques python;
     <ul>
         <li>
             <a href = "https://www.crummy.com/software/BeautifulSoup/bs4/doc/">Beautifulsoup</a>
@@ -36,21 +36,19 @@
 </p>
 
 <h2 align = "center"> Lancement du code </h2>
-<p>Pour commencer il faut lancer l'invite de commande et utliser les commande suivante:
+<p>Pour commencer, vous devez lancer l'invite de commande et employer les commandes suivantes:
     <ol>
-            <li>Crée un dossier pour déposer les fichier du github:<br/>
-                mkdir "Nom du dossier"</li>
-            <li>Diriger vous sur le dossier crée:<br/>
-                cd "Nom du dossier"</li>
-            <li>Ensuite il faut cloner le projet  :<br/>
+            <li>Clonez le projet:<br/>
                 git clone https://github.com/idarousse21/Projet-2.git</li>
-            <li>Diriger vous sur le dossier cloner:<br/>
-                cd "Nom du dossier"</li>
-            <li>Il faut créer un environnement virtuel:<br/>
-            python -m venv env</li>
-            <li>Paramétrer les librairies sur lesquelles le logiciel a été développé:<br/>
-                pip install -r Requirement.txt</li>
-            <li>Et enfin lancer le logiciel:<br/>
+            <li>Dirigez-vous sur le dossier cloné:<br/>
+                cd Projet-2 </li>
+            <li>Créez un environnement virtuel:<br/>
+                python -m venv env</li>
+            <li>Puis activation de l'environnement virtuel:<br/>
+                env\Scripts\activate</li>
+            <li>Configurez les bibliothèques à partir desquelles le logiciel a été développé:<br/>
+                pip install -r Requirements.txt</li>
+            <li>Et pour finir, lancez le logiciel:<br/>
                 python projet-2.py</li>
     </ol>
-    Vous pouvez constater l'avancement de l'écriture de fichier csv sur l'invite de commande.
+    Vous pouvez voir la progression de l'écriture du fichier CSV dans l'invite de commande.

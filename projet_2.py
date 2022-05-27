@@ -12,20 +12,19 @@ def parse_page(url):
 
 
 def scrap_all_books(home_url):
-    os.makedirs("book_to_scrap_categories", exist_ok=True)
     soup = parse_page(home_url)
     for list_category in (
         soup.find("ul", class_="nav nav-list").find("li").find("ul").find_all("li")
     ):
         category_urls = list_category.a.get("href")
-        category_urls_absolu = urllib.parse.urljoin(home_url, category_urls)
+        category_urls_absolute = urllib.parse.urljoin(home_url, category_urls)
         name_category = list_category.a.text.strip()
         print(name_category)
         csv_name = (name_category + ".csv").replace(" ", "_")
-
-        dossier_categories = "./book_to_scrap_categories"
-        csv_name = f"{dossier_categories}/{csv_name}"
-        with open(csv_name, "w", newline="", encoding="utf8") as csv_files:
+        os.makedirs("book_to_scrap_categories", exist_ok=True)
+        file_categories = "./book_to_scrap_categories"
+        csv_name = f"{file_categories}/{csv_name}"
+        with open(csv_name, "w", newline="", encoding="utf-8") as csv_files:
             writer = DictWriter(
                 csv_files,
                 fieldnames=[
@@ -42,20 +41,20 @@ def scrap_all_books(home_url):
                 ],
             )
             writer.writeheader()
-            for books_info in get_books_for_category(category_urls_absolu):
+            for books_info in get_books_for_category(category_urls_absolute):
                 writer.writerow(books_info)
 
 
-def get_books_for_category(url_parse):
-    for book_info in get_books_page(url_parse):
+def get_books_for_category(category_url):
+    for book_info in get_books_page(category_url):
         yield book_info
     while True:
-        soup = parse_page(url_parse)
+        soup = parse_page(category_url)
         next_page = soup.select_one("li.next>a")
         if next_page:
             next_url = next_page.get("href")
-            url_parse = urllib.parse.urljoin(url_parse, next_url)
-            for book_info in get_books_page(url_parse):
+            category_url = urllib.parse.urljoin(category_url, next_url)
+            for book_info in get_books_page(category_url):
                 yield book_info
         else:
             break
@@ -82,16 +81,16 @@ def scrap_infos_book(book_url):
     category = soup.find_all("a")[3].get_text()
     review_rating = product_page[6].get_text()
     image_url = soup.find("img").get("src")
-    urls_image_absolu = urllib.parse.urljoin(book_url, image_url)
-    dossier_image = "./image_book_to_scrap"
-    os.makedirs(dossier_image, exist_ok=True)
-    response = requests.get(urls_image_absolu, allow_redirects=True)
+    urls_image_absolute = urllib.parse.urljoin(book_url, image_url)
+    file_image = "./image_book_to_scrap"
+    os.makedirs(file_image, exist_ok=True)
+    response = requests.get(urls_image_absolute)
 
     pictures_name = "".join(filter(str.isalnum, title))
-    pictures_name = f"{dossier_image}/{pictures_name}"
+    pictures_name = f"{file_image}/{pictures_name}"
     with open(pictures_name + ".jpg", "wb") as file:
         file.write(response.content)
-
+  
     return {
         "product_page_url": book_url,
         "universal_product_code": universal_product_code,
@@ -102,8 +101,9 @@ def scrap_infos_book(book_url):
         "product_description": product_description,
         "category": category,
         "review_rating": review_rating,
-        "image_url": urls_image_absolu,
+        "image_url": urls_image_absolute,
     }
+    
 
 
 url = "https://books.toscrape.com/index.html"
